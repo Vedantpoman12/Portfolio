@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vedant Poman - Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #6d28d9;
+      --bg: #0f1117;
+      --card-bg: #181b26;
+      --card-border: #2a2f42;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #ec4899;
+      --tag-bg: rgba(139, 92, 246, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+
+    .toolbar {
+      max-width: 900px;
+      margin: 0 auto 24px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #aa367c, #4a2fbd);
+      color: #fff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-outline:hover {
+      background: var(--card-bg);
+      border-color: var(--primary);
+    }
+
+    .resume-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .resume-header {
+      border-bottom: 2px solid var(--card-border);
+      padding-bottom: 28px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-title h1 {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-title h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #a78bfa;
+      margin-top: 4px;
+    }
+
+    .contact-info {
+      text-align: right;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .contact-info a {
+      color: #c084fc;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #e2e8f0;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: linear-gradient(to bottom, #aa367c, #4a2fbd);
+      border-radius: 2px;
+    }
+
+    .item {
+      margin-bottom: 20px;
+    }
+
+    .item:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .item-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .item-sub {
+      font-size: 14px;
+      font-weight: 600;
+      color: #c084fc;
+    }
+
+    .item-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .bullet-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      color: #a78bfa;
+      position: absolute;
+      left: 2px;
+      font-weight: bold;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: #ddd6fe;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .resume-container {
+        padding: 24px;
+      }
+      .contact-info {
+        text-align: left;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff !important;
+        color: #111827 !important;
+        padding: 0 !important;
+      }
+      .toolbar {
+        display: none !important;
+      }
+      .resume-container {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: #fff !important;
+        color: #111827 !important;
+        max-width: 100% !important;
+      }
+      .header-title h1 {
+        color: #111827 !important;
+        -webkit-text-fill-color: #111827 !important;
+      }
+      .header-title h2 {
+        color: #4f46e5 !important;
+      }
+      .contact-info, .contact-info a {
+        color: #4b5563 !important;
+      }
+      .section-title {
+        color: #111827 !important;
+        border-color: #e5e7eb !important;
+      }
+      .item-title {
+        color: #111827 !important;
+      }
+      .item-sub {
+        color: #4338ca !important;
+      }
+      .bullet-list li {
+        color: #374151 !important;
+      }
+      .tag {
+        background: #f3f4f6 !important;
+        color: #1f2937 !important;
+        border-color: #d1d5db !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <a href="/" class="btn btn-outline">← Back to Portfolio</a>
+    <button onclick="window.print()" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 9V2h12v7"></path>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="resume-container">
+    <header class="resume-header">
+      <div class="header-title">
+        <h1>Vedant Poman</h1>
+        <h2>Second Year B.Tech | Full-Stack & AI Developer</h2>
+      </div>
+      <div class="contact-info">
+        <div><strong>Location:</strong> Mumbai, India</div>
+        <div><strong>Phone:</strong> +91 9833650239</div>
+        <div><strong>Email:</strong> <a href="mailto:vedant.poman.btech2028@atlasskilltech.university">vedant.poman.btech2028@atlasskilltech.university</a></div>
+        <div>
+          <strong>GitHub:</strong> <a href="https://github.com/Vedantpoman12" target="_blank">github.com/Vedantpoman12</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h3 class="section-title">Personal Profile</h3>
+      <p style="color: #cbd5e1; font-size: 14.5px; line-height: 1.6;">
+        Third-year B.Tech student with a focus on integrating AI solutions into scalable web applications. Experienced in building recommendation systems and computer vision tools, from industrial anomaly detection to agricultural diagnosis platforms. Seeking to leverage full-stack development and machine learning skills in a professional software engineering internship.
+      </p>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Education</h3>
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Atlas Skilltech University</span>
+            <div class="item-sub">Bachelor of Technology (B.Tech)</div>
+          </div>
+          <span class="item-date">JULY'24 – JUNE'28</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Maharashtra State Board</span>
+            <div class="item-sub">Higher Secondary Certificate (HSC)</div>
+          </div>
+          <span class="item-date">JULY'21 – JUNE'23</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Internship Experience</h3>
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Swastik Furnaces</span>
+            <div class="item-sub">Software Development Intern</div>
+          </div>
+          <span class="item-date">May 2025 – July 2026</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Maintained and optimized the company website using HTML, CSS, JavaScript, and WordPress.</li>
+          <li>Improved UI/UX and mobile responsiveness, significantly enhancing SEO and user engagement.</li>
+          <li>Engineered an automated computer vision system using a camera sensor and custom AI models to monitor industrial furnaces and detect metal burning/overheating in real time.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Projects</h3>
+      
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Industrial Furnace Automation System</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Engineered a computer vision system using a camera sensor and AI to monitor industrial furnaces and detect metal burning in real time.</li>
+          <li>Designed a safety-stop protocol that instantly halts machinery upon anomaly detection to prevent equipment damage and reduce material waste.</li>
+          <li>Automated the material lifecycle by creating logic to safely cycle out burned metal and trigger the mechanical loading of the next batch.</li>
+          <li>Optimized sensor inference speeds to ensure near-instantaneous response times, significantly improving industrial operational safety.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Agro Ai</span>
+          <span class="item-date">Tech Stack: Next.js, Flask, MongoDB, Google Gemini AI (LangChain), Tailwind CSS</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Developed an AI platform using Google Gemini AI for real-time crop disease diagnosis and farming recommendations.</li>
+          <li>Integrated multilingual voice assistance (TTS), market updates, and financial budgeting to boost farmer productivity.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">ZED Compliance Validator</span>
+          <span class="item-date">Tech Stack: Flask, Python, RAG, FAISS, Ollama</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Architected an AI assistant to automate ZED Bronze certification by validating PAN, Aadhaar, and GST documents.</li>
+          <li>Engineered a high-precision OCR pipeline using Tesseract and Poppler for government document digitization.</li>
+          <li>Implemented a secure RAG system with FAISS and local LLMs via Ollama to ensure 100% data privacy.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Hotel Management System</span>
+          <span class="item-date"><a href="https://hotel-khaki-chi.vercel.app" target="_blank" style="color: #c084fc; text-decoration: none;">Live Demo: hotel-khaki-chi.vercel.app</a></span>
+        </div>
+        <ul class="bullet-list">
+          <li>Engineered responsive full-stack booking and management software with live deployment on Vercel.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Skills & Abilities</h3>
+      <div class="skills-grid">
+        <div>
+          <div style="font-weight: 600; color: #fff; margin-bottom: 6px;">Programming Languages</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Java</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">C++</span>
+            <span class="tag">Data Structures & Algorithms</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight: 600; color: #fff; margin-bottom: 6px;">Web & Full-Stack Development</div>
+          <div class="tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Angular</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Django</span>
+            <span class="tag">HTML5/CSS3</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight: 600; color: #fff; margin-bottom: 6px;">Databases & Cloud</div>
+          <div class="tags">
+            <span class="tag">MongoDB</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">NoSQL</span>
+            <span class="tag">Microsoft Azure</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight: 600; color: #fff; margin-bottom: 6px;">DevOps & Tools</div>
+          <div class="tags">
+            <span class="tag">Docker</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Linux (CLI)</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">Power BI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Certifications & Achievements</h3>
+      <ul class="bullet-list">
+        <li><strong>First Place:</strong> Inter-College Hackathon</li>
+        <li><strong>Participant:</strong> Smart India Hackathon (SIH)</li>
+        <li><strong>Certification:</strong> Power BI for Beginners – Coursera</li>
+      </ul>
+    </section>
+  </div>
+
+</body>
+</html>
