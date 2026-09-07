@@ -1,22 +1,16 @@
-import meter1 from "../assets/img/meter1.svg";
-import meter2 from "../assets/img/meter2.svg";
-import meter3 from "../assets/img/meter3.svg";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import arrow1 from "../assets/img/arrow1.svg";
-import arrow2 from "../assets/img/arrow2.svg";
-import colorSharp from "../assets/img/color-sharp.png"
+import colorSharp from "../assets/img/color-sharp.png";
 
 export const Skills = () => {
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 4
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -28,41 +22,44 @@ export const Skills = () => {
     }
   };
 
+  const skills = [
+    { name: "Python", emoji: "🐍" },
+    { name: "JavaScript", emoji: "⚡" },
+    { name: "TypeScript", emoji: "🔷" },
+    { name: "React & Next.js", emoji: "⚛️" },
+    { name: "Node.js", emoji: "🟢" },
+    { name: "Machine Learning", emoji: "🤖" },
+    { name: "Computer Vision", emoji: "👁️" },
+    { name: "Gemini AI", emoji: "✨" },
+    { name: "Azure Cloud", emoji: "☁️" },
+    { name: "MongoDB", emoji: "🍃" },
+    { name: "Docker", emoji: "🐳" },
+    { name: "C / Java", emoji: "💻" },
+    { name: "FAISS & RAG", emoji: "🔍" },
+    { name: "HTML & CSS", emoji: "🎨" },
+  ];
+
   return (
     <section className="skill" id="skills">
-        <div className="container">
-            <div className="row">
-                <div className="col-12">
-                    <div className="skill-bx wow zoomIn">
-                        <h2>Skills</h2>
-                        <p>Core competencies in full-stack web engineering, artificial intelligence, cloud infrastructure, and data pipelines developed through academic projects and industry internship.</p>
-                        <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
-                            <div className="item">
-                                <img src={meter1} alt="AI & Computer Vision" />
-                                <h5>AI & Computer Vision</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter2} alt="Full-Stack Web Dev" />
-                                <h5>Full-Stack Web Dev</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter3} alt="Cloud & Azure" />
-                                <h5>Cloud & Azure</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter1} alt="Data Engineering" />
-                                <h5>Data Engineering</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter2} alt="DevOps & Docker" />
-                                <h5>DevOps & Docker</h5>
-                            </div>
-                        </Carousel>
-                    </div>
-                </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="skill-bx wow zoomIn">
+              <h2>Skills</h2>
+              <p>Core competencies in full-stack web engineering, artificial intelligence, cloud infrastructure, and data pipelines developed through academic projects and industry internship.</p>
+              <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={2000} className="owl-carousel owl-theme skill-slider">
+                {skills.map((skill, index) => (
+                  <div className="item" key={index}>
+                    <div style={{ fontSize: '3rem', marginBottom: '10px' }}>{skill.emoji}</div>
+                    <h5>{skill.name}</h5>
+                  </div>
+                ))}
+              </Carousel>
             </div>
+          </div>
         </div>
-        <img className="background-image-left" src={colorSharp} alt="Image" />
+      </div>
+      <img className="background-image-left" src={colorSharp} alt="Background" />
     </section>
-  )
-}
+  );
+};
