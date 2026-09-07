@@ -1,8 +1,11 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
-import projImg1 from "../assets/img/project-img1.png";
-import projImg2 from "../assets/img/project-img2.png";
-import projImg3 from "../assets/img/project-img3.png";
+import hotelManagementImg from "../assets/img/hotel-management.png";
+import industrialFurnaceImg from "../assets/img/industrial-furnace.jpg";
+import agroAiImg from "../assets/img/agro-ai.png";
+import skillGapImg from "../assets/img/skill-gap.png";
+import zedValidatorImg from "../assets/img/zed-validator.png";
+import clashOfClansImg from "../assets/img/clash-of-clans.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
@@ -11,40 +14,40 @@ export const Projects = () => {
 
   const projects = [
     {
+      title: "Hotel Management System",
+      description: "Full Stack & Web Booking Platform",
+      imgUrl: hotelManagementImg,
+      url: "https://github.com/Vedantpoman12/Hotel-Management-system",
+    },
+    {
       title: "Industrial Furnace Automation",
       description: "Computer Vision & Real-Time AI Anomaly Detection",
-      imgUrl: projImg1,
+      imgUrl: industrialFurnaceImg,
       url: "https://github.com/Vedantpoman12",
     },
     {
       title: "Agro Ai",
       description: "Crop Disease Diagnosis with Gemini AI & Next.js",
-      imgUrl: projImg2,
+      imgUrl: agroAiImg,
       url: "https://github.com/Vedantpoman12",
     },
     {
       title: "ZED Compliance Validator",
       description: "Document AI Pipeline with OCR & FAISS RAG",
-      imgUrl: projImg3,
+      imgUrl: zedValidatorImg,
       url: "https://github.com/Vedantpoman12",
-    },
-    {
-      title: "Hotel Management System",
-      description: "Full Stack & Web Booking Platform",
-      imgUrl: projImg1,
-      url: "https://github.com/Vedantpoman12/Hotel-Management-system",
     },
     {
       title: "Skill Gap Bridge",
       description: "Education & Career Readiness Platform",
-      imgUrl: projImg2,
+      imgUrl: skillGapImg,
       url: "https://github.com/Vedantpoman12/Skill-Gap-Bridge",
     },
     {
-      title: "Flask Azure Web App",
-      description: "Cloud Deployed Python & Flask Service",
-      imgUrl: projImg3,
-      url: "https://github.com/Vedantpoman12/Flask-Azure-web-app",
+      title: "Clash of Clans Project",
+      description: "Interactive Clan Strategy & Defense Analytics",
+      imgUrl: clashOfClansImg,
+      url: "https://github.com/Vedantpoman12",
     },
   ];
 
@@ -52,37 +55,37 @@ export const Projects = () => {
     {
       title: "Hotel Management System",
       description: "Full Stack & Web Booking Platform",
-      imgUrl: projImg1,
+      imgUrl: hotelManagementImg,
       url: "https://github.com/Vedantpoman12/Hotel-Management-system",
     },
     {
       title: "Skill Gap Bridge",
       description: "Education & Career Readiness Platform",
-      imgUrl: projImg2,
+      imgUrl: skillGapImg,
       url: "https://github.com/Vedantpoman12/Skill-Gap-Bridge",
     },
     {
-      title: "Flask Azure Web App",
-      description: "Cloud Deployed Python & Flask Service",
-      imgUrl: projImg3,
-      url: "https://github.com/Vedantpoman12/Flask-Azure-web-app",
+      title: "Clash of Clans Project",
+      description: "Interactive Clan Strategy & Defense Analytics",
+      imgUrl: clashOfClansImg,
+      url: "https://github.com/Vedantpoman12",
     },
     {
       title: "Azure Cloud System",
       description: "Cloud Computing & Azure Infrastructure",
-      imgUrl: projImg2,
+      imgUrl: industrialFurnaceImg,
       url: "https://github.com/Vedantpoman12/Azure-Exp2",
     },
     {
       title: "MongoDB Atlas Service",
       description: "Cloud Database Architecture & Python API",
-      imgUrl: projImg3,
+      imgUrl: hotelManagementImg,
       url: "https://github.com/Vedantpoman12/atlas-exp3",
     },
     {
       title: "Personal Portfolio Site",
       description: "Responsive Web & UI Engineering",
-      imgUrl: projImg1,
+      imgUrl: skillGapImg,
       url: "https://github.com/Vedantpoman12/Vedantpoman12.github.io",
     },
   ];
@@ -91,38 +94,38 @@ export const Projects = () => {
     {
       title: "Industrial Furnace Automation",
       description: "Computer Vision & Real-Time AI Anomaly Detection",
-      imgUrl: projImg1,
+      imgUrl: industrialFurnaceImg,
       url: "https://github.com/Vedantpoman12",
     },
     {
       title: "Agro Ai Platform",
       description: "Crop Disease Diagnosis with Gemini AI & Next.js",
-      imgUrl: projImg2,
+      imgUrl: agroAiImg,
       url: "https://github.com/Vedantpoman12",
     },
     {
       title: "ZED Compliance Validator",
       description: "Document AI Pipeline with OCR & FAISS RAG",
-      imgUrl: projImg3,
+      imgUrl: zedValidatorImg,
+      url: "https://github.com/Vedantpoman12",
+    },
+    {
+      title: "Clash of Clans Project",
+      description: "Interactive Clan Strategy & Defense Analytics",
+      imgUrl: clashOfClansImg,
       url: "https://github.com/Vedantpoman12",
     },
     {
       title: "Self AI Assistant",
       description: "Intelligent Agent & Machine Learning",
-      imgUrl: projImg1,
+      imgUrl: agroAiImg,
       url: "https://github.com/Vedantpoman12/self-ai-",
     },
     {
       title: "Java Systems App",
       description: "Core Java Applications & Services",
-      imgUrl: projImg2,
+      imgUrl: industrialFurnaceImg,
       url: "https://github.com/Vedantpoman12/Experiment-7",
-    },
-    {
-      title: "Python Data Processing",
-      description: "Algorithms & Machine Intelligence",
-      imgUrl: projImg3,
-      url: "https://github.com/Vedantpoman12/Experiment-6",
     },
   ];
 
