@@ -44,7 +44,7 @@ export const Projects = () => {
       url: "https://github.com/Vedantpoman12/Skill-Gap-Bridge",
     },
     {
-      title: "Clash of Clans Project",
+      title: "ProjectClash",
       description: "Interactive Clan Strategy & Defense Analytics",
       imgUrl: clashOfClansImg,
       url: "https://github.com/Vedantpoman12",
@@ -65,7 +65,7 @@ export const Projects = () => {
       url: "https://github.com/Vedantpoman12/Skill-Gap-Bridge",
     },
     {
-      title: "Clash of Clans Project",
+      title: "ProjectClash",
       description: "Interactive Clan Strategy & Defense Analytics",
       imgUrl: clashOfClansImg,
       url: "https://github.com/Vedantpoman12",
@@ -110,7 +110,7 @@ export const Projects = () => {
       url: "https://github.com/Vedantpoman12",
     },
     {
-      title: "Clash of Clans Project",
+      title: "ProjectClash",
       description: "Interactive Clan Strategy & Defense Analytics",
       imgUrl: clashOfClansImg,
       url: "https://github.com/Vedantpoman12",
