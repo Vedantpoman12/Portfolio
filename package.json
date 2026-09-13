@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm start --prefix personal-portfolio",
+    "dev": "npm start --prefix personal-portfolio",
+    "build": "npm run build --prefix personal-portfolio",
+    "test": "npm test --prefix personal-portfolio"
+  }
+}
