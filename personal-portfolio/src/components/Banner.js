@@ -10,8 +10,7 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "Web Designer", "UI/UX Designer" ];
+  const toRotate = [ "Full-Stack Developer", "AI & ML Engineer", "Computer Vision Specialist", "Software Engineer" ];
   const period = 2000;
 
   useEffect(() => {
@@ -20,6 +19,7 @@ export const Banner = () => {
     }, delta);
 
     return () => { clearInterval(ticker) };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text])
 
   const tick = () => {
@@ -35,15 +35,11 @@ export const Banner = () => {
 
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
-      setIndex(prevIndex => prevIndex - 1);
       setDelta(period);
     } else if (isDeleting && updatedText === '') {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
-      setIndex(1);
       setDelta(500);
-    } else {
-      setIndex(prevIndex => prevIndex + 1);
     }
   }
 
@@ -56,9 +52,12 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Judy`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
+                <h1>{`Hi! I'm Vedant Poman`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Full-Stack Developer", "AI & ML Engineer", "Computer Vision Specialist", "Software Engineer" ]'><span className="wrap">{text}</span></span></h1>
+                  <p>Third-year B.Tech student at Atlas Skilltech University specializing in integrating AI solutions into scalable web applications. Experienced in building recommendation systems, computer vision tools, and full-stack platforms from industrial automation at Swastik Furnaces to agricultural diagnosis platforms.</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+                    <button onClick={() => { const el = document.getElementById('connect'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>Let’s Connect <ArrowRightCircle size={25} /></button>
+                    <button onClick={() => window.open('/resume.pdf', '_blank')}>View Resume <ArrowRightCircle size={25} /></button>
+                  </div>
               </div>}
             </TrackVisibility>
           </Col>

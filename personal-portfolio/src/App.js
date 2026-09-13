@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavBar } from "./components/NavBar";
-import { Banner } from "./components/Banner";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+
+import { NavBar } from './components/NavBar';
+import { Footer } from './components/Footer';
+import { HomePage } from './pages/HomePage';
+import { ProjectsPage } from './pages/ProjectsPage';
+import { ContactPage } from './pages/ContactPage';
+
+// Scroll to top on every page change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+      <ScrollToTop />
       <NavBar />
-      <Banner />
-      <Skills />
-      <Projects />
-      <Contact />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </main>
       <Footer />
-    </div>
+    </Router>
   );
 }
 

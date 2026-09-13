@@ -1,8 +1,11 @@
-import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
-import projImg1 from "../assets/img/project-img1.png";
-import projImg2 from "../assets/img/project-img2.png";
-import projImg3 from "../assets/img/project-img3.png";
+import hotelManagementImg from "../assets/img/hotel-management.png";
+import industrialFurnaceImg from "../assets/img/industrial-furnace.jpg";
+import agroAiImg from "../assets/img/agro-ai.png";
+import skillGapImg from "../assets/img/skill-gap.png";
+import zedValidatorImg from "../assets/img/zed-validator.png";
+import clashOfClansImg from "../assets/img/clash-of-clans.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
@@ -11,34 +14,40 @@ export const Projects = () => {
 
   const projects = [
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg1,
+      title: "Hotel Management System",
+      description: "Full Stack & Web Booking Platform",
+      imgUrl: hotelManagementImg,
+      url: "https://github.com/Vedantpoman12/Hotel-Management-system",
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
+      title: "Industrial Furnace Automation",
+      description: "Computer Vision & Real-Time AI Anomaly Detection",
+      imgUrl: industrialFurnaceImg,
+      url: "https://github.com/Vedantpoman12",
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg3,
+      title: "Agro Ai",
+      description: "Crop Disease Diagnosis with Gemini AI & Next.js",
+      imgUrl: agroAiImg,
+      url: "https://github.com/Vedantpoman12",
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg1,
+      title: "ZED Compliance Validator",
+      description: "Document AI Pipeline with OCR & FAISS RAG",
+      imgUrl: zedValidatorImg,
+      url: "https://github.com/Vedantpoman12",
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
+      title: "Skill Gap Bridge",
+      description: "Education & Career Readiness Platform",
+      imgUrl: skillGapImg,
+      url: "https://github.com/Vedantpoman12/Skill-Gap-Bridge",
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg3,
+      title: "ProjectClash",
+      description: "Interactive Clan Strategy & Defense Analytics",
+      imgUrl: clashOfClansImg,
+      url: "https://github.com/Vedantpoman12",
     },
   ];
 
@@ -51,48 +60,18 @@ export const Projects = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
                 <h2>Projects</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                  <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
-                    <Nav.Item>
-                      <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="third">Tab 3</Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                  <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
-                    <Tab.Pane eventKey="first">
-                      <Row>
-                        {
-                          projects.map((project, index) => {
-                            return (
-                              <ProjectCard
-                                key={index}
-                                {...project}
-                                />
-                            )
-                          })
-                        }
-                      </Row>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="section">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quam, quod neque provident velit, rem explicabo excepturi id illo molestiae blanditiis, eligendi dicta officiis asperiores delectus quasi inventore debitis quo.</p>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quam, quod neque provident velit, rem explicabo excepturi id illo molestiae blanditiis, eligendi dicta officiis asperiores delectus quasi inventore debitis quo.</p>
-                    </Tab.Pane>
-                  </Tab.Content>
-                </Tab.Container>
+                <p>Explore projects developed by Vedant Poman, ranging from full-stack web applications and cloud deployments on Azure to intelligent AI systems and database architectures.</p>
+                <Row>
+                  {projects.map((project, index) => (
+                    <ProjectCard key={index} {...project} />
+                  ))}
+                </Row>
               </div>}
             </TrackVisibility>
           </Col>
         </Row>
       </Container>
-      <img className="background-image-right" src={colorSharp2}></img>
+      <img className="background-image-right" src={colorSharp2} alt="Background decoration" />
     </section>
-  )
-}
+  );
+};
