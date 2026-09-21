@@ -1,8 +1,37 @@
+import { useEffect, useRef, useState } from 'react';
+import StarBurst from './StarBurst';
 
 export const Footer = () => {
+  const footerRef = useRef(null);
+  const [starOpacity, setStarOpacity] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = footerRef.current;
+      if (!footer) return;
+      const rect = footer.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // 0 when footer top is at bottom of viewport, 1 when fully in view
+      const progress = Math.max(0, Math.min(1, (windowH - rect.top) / rect.height));
+      setStarOpacity(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <footer className="site-footer">
-      <div className="footer-inner">
+    <footer className="site-footer" ref={footerRef} style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* StarBurst background — fades in as footer scrolls into view */}
+      <div
+        className="footer-starburst-bg"
+        style={{ opacity: starOpacity, transition: 'opacity 0.15s linear' }}
+      >
+        <StarBurst />
+      </div>
+
+      <div className="footer-inner" style={{ position: 'relative', zIndex: 1 }}>
         {/* Left — Name branding */}
         <div className="footer-left">
           <div className="footer-name">
@@ -49,10 +78,11 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="footer-bottom">
+      <div className="footer-bottom" style={{ position: 'relative', zIndex: 1 }}>
         <span className="footer-copy">© 2026 VEDANT POMAN</span>
         <span className="footer-bottom-loc">MUMBAI // INDIA</span>
       </div>
     </footer>
   );
 };
+

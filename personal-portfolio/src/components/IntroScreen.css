@@ -1,0 +1,117 @@
+/* ── Intro / Splash Screen ── */
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intro-screen.intro-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Rising Lines canvas fills the background */
+.intro-screen .rising-lines-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Content layered on top */
+.intro-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  animation: introContentIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+@keyframes introContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.9;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.intro-first {
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  color: #f3f7ff;
+  opacity: 0.95;
+}
+
+.intro-last {
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(243, 247, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.intro-role {
+  margin-top: 1.5rem;
+  font-family: 'Space Grotesk', 'Inter', monospace;
+  font-size: clamp(0.55rem, 1.4vw, 0.75rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(181, 223, 255, 0.7);
+  animation: introRoleIn 0.6s ease 1s both;
+}
+
+@keyframes introRoleIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Animated horizontal scanline */
+.intro-scanline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(243, 247, 255, 0.0) 15%,
+    rgba(243, 247, 255, 0.4) 50%,
+    rgba(243, 247, 255, 0.0) 85%,
+    transparent 100%
+  );
+  z-index: 2;
+  animation: scanlineRise 3.2s ease-in-out forwards;
+}
+
+@keyframes scanlineRise {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  to {
+    bottom: 100%;
+    opacity: 0;
+  }
+}
