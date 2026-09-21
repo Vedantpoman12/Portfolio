@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a1a0a"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+    <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ff6620"/>
+      <stop offset="100%" stop-color="#00ff6600"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <g stroke="#00ff3310" stroke-width="0.5">
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="150" y1="0" x2="150" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="450" y1="0" x2="450" y2="400"/>
+  </g>
+
+  <!-- Radar circles -->
+  <g fill="none" stroke="#00ff44" opacity="0.15">
+    <circle cx="300" cy="200" r="160"/>
+    <circle cx="300" cy="200" r="120"/>
+    <circle cx="300" cy="200" r="80"/>
+    <circle cx="300" cy="200" r="40"/>
+  </g>
+  <g fill="none" stroke="#00ff44" opacity="0.35">
+    <circle cx="300" cy="200" r="160" stroke-width="1.5"/>
+  </g>
+
+  <!-- Radar crosshairs -->
+  <g stroke="#00ff4420" stroke-width="0.8">
+    <line x1="300" y1="40" x2="300" y2="360"/>
+    <line x1="140" y1="200" x2="460" y2="200"/>
+  </g>
+
+  <!-- Radar sweep (static suggestion) -->
+  <path d="M300,200 L460,200 A160,160 0 0,0 366,61 Z" fill="#00ff4408" stroke="#00ff44" stroke-width="1" opacity="0.5"/>
+
+  <!-- Glow center -->
+  <circle cx="300" cy="200" r="90" fill="url(#radarGlow)"/>
+
+  <!-- Paw print icon (center) -->
+  <g transform="translate(300,200)" fill="#00ff44" opacity="0.9">
+    <!-- Main paw pad -->
+    <ellipse cx="0" cy="8" rx="14" ry="11"/>
+    <!-- Top toes -->
+    <ellipse cx="-15" cy="-3" rx="6" ry="8" transform="rotate(-20,-15,-3)"/>
+    <ellipse cx="-6" cy="-14" rx="6" ry="8" transform="rotate(-5,-6,-14)"/>
+    <ellipse cx="6" cy="-14" rx="6" ry="8" transform="rotate(5,6,-14)"/>
+    <ellipse cx="15" cy="-3" rx="6" ry="8" transform="rotate(20,15,-3)"/>
+  </g>
+
+  <!-- Ping dots -->
+  <circle cx="380" cy="130" r="4" fill="#00ff44" opacity="0.8"/>
+  <circle cx="380" cy="130" r="10" fill="none" stroke="#00ff44" stroke-width="1" opacity="0.4"/>
+  <circle cx="220" cy="260" r="3" fill="#ffaa00" opacity="0.7"/>
+  <circle cx="350" cy="280" r="2.5" fill="#00ff44" opacity="0.5"/>
+
+  <!-- Status text bottom left -->
+  <text x="20" y="370" font-family="monospace" font-size="11" fill="#00ff44" opacity="0.6">RESCUE_RADAR // LIVE</text>
+
+  <!-- Tags bottom right -->
+  <g font-family="monospace" font-size="10" fill="#00cc44" opacity="0.7">
+    <rect x="388" y="356" width="28" height="16" rx="3" fill="#00ff4415"/>
+    <text x="392" y="368">AI</text>
+    <rect x="422" y="356" width="34" height="16" rx="3" fill="#00ff4415"/>
+    <text x="426" y="368">WEB</text>
+    <rect x="462" y="356" width="52" height="16" rx="3" fill="#00ff4415"/>
+    <text x="466" y="368">PYTHON</text>
+  </g>
+
+  <!-- Corner brackets -->
+  <g stroke="#00ff44" stroke-width="1.5" fill="none" opacity="0.4">
+    <polyline points="20,20 20,36 36,36"/>
+    <polyline points="580,20 580,36 564,36"/>
+    <polyline points="20,380 20,364 36,364"/>
+    <polyline points="580,380 580,364 564,364"/>
+  </g>
+</svg>

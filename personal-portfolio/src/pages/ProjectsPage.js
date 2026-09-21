@@ -92,12 +92,27 @@ const projects = [
     desc: 'AI-powered skill gap analysis tool that compares a user\'s current skills against job market demands and generates a personalized learning roadmap using NLP and data-driven skill mappings.',
     tags: ['PYTHON', 'NLTK', 'REACT', 'FASTAPI', 'SCIKIT-LEARN'],
     focus: 'CORE FOCUS // PERSONALIZED ROADMAP GENERATION',
-    github: 'https://github.com/Vedantpoman12',
+    github: 'https://github.com/Vedantpoman12/Skill-Gap-Bridge',
     techSpecs: [
       { label: 'STATUS', value: 'COMPLETED // PROTOTYPE' },
       { label: 'ENGINE', value: 'FASTAPI + NLTK VECTORIZER' },
       { label: 'MAPPING', value: 'DYNAMIC MARKET DEMAND MATRIX' },
       { label: 'OUTPUT', value: 'STEP-BY-STEP LEARNING PATH' },
+    ],
+  },
+  {
+    number: 'PROJECT_06',
+    name: 'RESCUERADAR',
+    category: 'CATEGORY: AI / ANIMAL WELFARE',
+    desc: 'Platform that leverages AI and modern web technologies to create a comprehensive ecosystem for animal welfare. Features AI-powered triage, intake management, health monitoring, and real-time coordination tools for rescue organizations.',
+    tags: ['PYTHON', 'AI', 'WEB', 'FLASK', 'MACHINE LEARNING'],
+    focus: 'CORE FOCUS // AI TRIAGE & ANIMAL WELFARE COORDINATION',
+    github: 'https://github.com/Vedantpoman12',
+    techSpecs: [
+      { label: 'STATUS', value: 'ACTIVE // IN DEVELOPMENT' },
+      { label: 'AI_MODEL', value: 'TRIAGE CLASSIFICATION ENGINE' },
+      { label: 'STACK', value: 'PYTHON · AI · WEB PLATFORM' },
+      { label: 'UPDATED', value: 'DEC 2025' },
     ],
   },
 ];
@@ -129,7 +144,7 @@ export const ProjectsPage = () => {
       <div className="projects-list">
         {projects.map((p, i) => (
           <FadeUp key={i} delay={i * 60}>
-            <div className="project-row">
+            <div className="project-row cursor-target">
               {/* Left info */}
               <div className="project-row-left">
                 <span className="project-number">{p.number}</span>
