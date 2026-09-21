@@ -1,25 +1,11 @@
 import { useEffect, useRef } from 'react';
 import './StarBurst.css';
 
-// StarBurst — custom canvas recreation matching React Bits Pro config:
-//   density=1.4, starCount=370, starSize=0.4, brightness=2.2
-//   flowerIntensity=0.3, twinkleSpeed=0.3, wobbleAmount=1.7
-//   innerLayerIntensity=0.6, outerLayerIntensity=0.8, fadeHeight=2.1
+// StarBurst / ParticleBurst — 3D spherical particle explosion
+// Implements the 3D particle burst model on high-performance Canvas
+// (Spherical explosion, 3D velocities, lifetimes, additive blending)
 
-const CONFIG = {
-  density: 1.4,
-  starCount: 370,
-  starSize: 0.4,
-  brightness: 2.2,
-  flowerIntensity: 0.3,
-  twinkleSpeed: 0.3,
-  wobbleAmount: 1.7,
-  innerLayerIntensity: 0.6,
-  outerLayerIntensity: 0.8,
-  fadeHeight: 2.1,
-};
-
-const StarBurst = () => {
+const StarBurst = ({ count = 1500, color = '#ffaa00', className = '' }) => {
   const canvasRef = useRef(null);
   const animRef = useRef(null);
 
@@ -27,145 +13,122 @@ const StarBurst = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    let W, H;
+    let W = 0;
+    let H = 0;
+    let dpr = 1;
+
     const resize = () => {
-      W = canvas.width = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+      const parent = canvas.parentElement;
+      const rect = parent ? parent.getBoundingClientRect() : null;
+      W = rect && rect.width > 0 ? rect.width : window.innerWidth;
+      H = rect && rect.height > 0 ? rect.height : (window.innerHeight || 400);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width = `${W}px`;
+      canvas.style.height = `${H}px`;
     };
+
     resize();
     window.addEventListener('resize', resize);
 
-    // Create stars
-    const count = Math.floor(CONFIG.starCount * CONFIG.density);
+    // Initialize 3D particle positions, velocities, and lifetimes
+    const positions = new Float32Array(count * 3);
+    const velocities = new Float32Array(count * 3);
+    const lifetimes = new Float32Array(count);
 
-    const stars = Array.from({ length: count }, () => {
-      // Distribute: more stars toward center/bottom (burst origin at center-bottom)
-      const angle = Math.random() * Math.PI * 2;
-      // distance from center — bias toward edges for outer layer, center for inner
-      const layer = Math.random() < 0.5 ? 'inner' : 'outer';
-      const dist = layer === 'inner'
-        ? Math.random() * 0.45          // 0..0.45 of canvas half-width
-        : 0.35 + Math.random() * 0.65;  // 0.35..1.0
+    const initParticle = (i) => {
+      positions[i * 3] = 0;
+      positions[i * 3 + 1] = 0;
+      positions[i * 3 + 2] = 0;
 
-      return {
-        // Normalized coordinates: (0,0) = canvas center
-        nx: Math.cos(angle) * dist,
-        ny: Math.sin(angle) * dist,
-        size: (0.5 + Math.random() * 2) * CONFIG.starSize * 2,
-        phase: Math.random() * Math.PI * 2,
-        twinkleFreq: (0.5 + Math.random()) * CONFIG.twinkleSpeed * 2,
-        wobblePhase: Math.random() * Math.PI * 2,
-        wobbleFreq: 0.3 + Math.random() * 0.7,
-        layer,
-        baseOpacity: layer === 'inner'
-          ? (0.4 + Math.random() * 0.6) * CONFIG.innerLayerIntensity * CONFIG.brightness * 0.45
-          : (0.3 + Math.random() * 0.5) * CONFIG.outerLayerIntensity * CONFIG.brightness * 0.35,
-        // "flower" petal stars — spike-like streaks
-        isFlower: Math.random() < CONFIG.flowerIntensity * 0.3,
-      };
-    });
+      const theta = Math.random() * 2 * Math.PI;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      const speed = Math.random() * 3.5 + 1.2;
 
-    let t = 0;
+      velocities[i * 3] = speed * Math.sin(phi) * Math.cos(theta);
+      velocities[i * 3 + 1] = speed * Math.sin(phi) * Math.sin(theta);
+      velocities[i * 3 + 2] = speed * Math.cos(phi);
 
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-
-      const cx = W / 2;
-      const cy = H * 0.5;
-      const halfW = W / 2;
-      const halfH = H / 2;
-
-      // Background
-      ctx.fillStyle = 'rgba(0,0,8,1)';
-      ctx.fillRect(0, 0, W, H);
-
-      // Central burst glow
-      const burstGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W, H) * 0.4);
-      burstGrad.addColorStop(0, `rgba(200, 220, 255, ${0.06 * CONFIG.brightness})`);
-      burstGrad.addColorStop(0.4, `rgba(150, 180, 255, ${0.03 * CONFIG.brightness})`);
-      burstGrad.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = burstGrad;
-      ctx.fillRect(0, 0, W, H);
-
-      stars.forEach((s) => {
-        // Wobble
-        const wobX = Math.sin(t * s.wobbleFreq + s.wobblePhase) * CONFIG.wobbleAmount * 0.5;
-        const wobY = Math.cos(t * s.wobbleFreq * 0.7 + s.wobblePhase) * CONFIG.wobbleAmount * 0.3;
-
-        const px = cx + (s.nx + wobX * 0.01) * halfW;
-        const py = cy + (s.ny + wobY * 0.01) * halfH;
-
-        // Fade based on vertical position (fadeHeight config)
-        const normalizedY = (py / H);                    // 0=top, 1=bottom
-        const fade = Math.max(0, Math.min(1,
-          normalizedY * CONFIG.fadeHeight               // fades in from top
-        ));
-
-        // Twinkle
-        const twinkle = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t * s.twinkleFreq + s.phase));
-
-        const opacity = s.baseOpacity * twinkle * fade;
-        if (opacity < 0.01) return;
-
-        if (s.isFlower) {
-          // Spike / petal star — draw a 4-point burst
-          ctx.save();
-          ctx.translate(px, py);
-          ctx.rotate(t * 0.2 + s.phase);
-
-          const len = s.size * 4 * CONFIG.brightness * 0.4;
-          const w = s.size * 0.6;
-
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = `rgba(200,220,255,${opacity * 0.8})`;
-
-          for (let i = 0; i < 4; i++) {
-            ctx.save();
-            ctx.rotate((i * Math.PI) / 2);
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.quadraticCurveTo(w, len * 0.3, 0, len);
-            ctx.quadraticCurveTo(-w, len * 0.3, 0, 0);
-            ctx.fillStyle = `rgba(220,235,255,${opacity})`;
-            ctx.fill();
-            ctx.restore();
-          }
-          ctx.restore();
-        } else {
-          // Regular star dot
-          ctx.save();
-          ctx.shadowBlur = s.size * 3 * CONFIG.brightness * 0.5;
-          ctx.shadowColor = `rgba(200,220,255,${opacity * 0.6})`;
-
-          ctx.beginPath();
-          ctx.arc(px, py, s.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(230,240,255,${opacity})`;
-          ctx.fill();
-          ctx.restore();
-        }
-      });
-
-      // Top fade-out gradient (fades to transparent so site content blends in)
-      const topFade = ctx.createLinearGradient(0, 0, 0, H * 0.5);
-      topFade.addColorStop(0, 'rgba(0,0,8,1)');
-      topFade.addColorStop(1, 'rgba(0,0,8,0)');
-      ctx.fillStyle = topFade;
-      ctx.fillRect(0, 0, W, H * 0.5);
-
-      t += 0.016;
-      animRef.current = requestAnimationFrame(draw);
+      lifetimes[i] = Math.random();
     };
 
-    draw();
+    for (let i = 0; i < count; i++) {
+      initParticle(i);
+    }
+
+    let lastTime = performance.now();
+
+    const render = (now) => {
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
+      ctx.save();
+      ctx.scale(dpr, dpr);
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#020008';
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.globalCompositeOperation = 'lighter';
+
+      const cx = W / 2;
+      const cy = H / 2;
+      const cameraZ = 6;
+      const fov = Math.min(W, H) * 1.2;
+
+      for (let i = 0; i < count; i++) {
+        lifetimes[i] -= delta * 0.5;
+
+        if (lifetimes[i] <= 0) {
+          initParticle(i);
+          lifetimes[i] = 1;
+        } else {
+          positions[i * 3] += velocities[i * 3] * delta;
+          positions[i * 3 + 1] += velocities[i * 3 + 1] * delta;
+          positions[i * 3 + 2] += velocities[i * 3 + 2] * delta;
+        }
+
+        const x = positions[i * 3];
+        const y = positions[i * 3 + 1];
+        const z = positions[i * 3 + 2];
+
+        const pz = z + cameraZ;
+        if (pz <= 0.1) continue;
+
+        const screenX = cx + (x / pz) * fov;
+        const screenY = cy + (y / pz) * fov;
+
+        if (screenX < -20 || screenX > W + 20 || screenY < -20 || screenY > H + 20) {
+          continue;
+        }
+
+        const alpha = Math.min(1, lifetimes[i] * 1.5) * 0.85;
+        const radius = Math.max(0.7, (1.8 / pz) * (W / 600));
+
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, radius, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+      }
+
+      ctx.restore();
+      animRef.current = requestAnimationFrame(render);
+    };
+
+    animRef.current = requestAnimationFrame(render);
 
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [count, color]);
 
-  return <canvas ref={canvasRef} className="star-burst-canvas" />;
+  return <canvas ref={canvasRef} className={`star-burst-canvas ${className}`} />;
 };
 
 export default StarBurst;

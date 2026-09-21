@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import StarBurst from './StarBurst';
+import RisingLines from './RisingLines';
 
 export const Footer = () => {
   const footerRef = useRef(null);
-  const [starOpacity, setStarOpacity] = useState(0);
+  const [bgOpacity, setBgOpacity] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -11,9 +11,9 @@ export const Footer = () => {
       if (!footer) return;
       const rect = footer.getBoundingClientRect();
       const windowH = window.innerHeight;
-      // 0 when footer top is at bottom of viewport, 1 when fully in view
-      const progress = Math.max(0, Math.min(1, (windowH - rect.top) / rect.height));
-      setStarOpacity(progress);
+      // Fade in smoothly as footer enters viewport, stay clearly visible
+      const progress = Math.max(0, Math.min(1, (windowH - rect.top) / (rect.height * 0.5)));
+      setBgOpacity(Math.max(0.7, progress));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -23,12 +23,26 @@ export const Footer = () => {
 
   return (
     <footer className="site-footer" ref={footerRef} style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* StarBurst background — fades in as footer scrolls into view */}
+      {/* Rising Lines background — radiant fan of rising laser lines matching React Bits Pro */}
       <div
         className="footer-starburst-bg"
-        style={{ opacity: starOpacity, transition: 'opacity 0.15s linear' }}
+        style={{ opacity: bgOpacity, transition: 'opacity 0.2s ease-out' }}
       >
-        <StarBurst />
+        <RisingLines
+          color="#f3f7ff"
+          horizonColor="#e6e6ed"
+          haloColor="#b5dfff"
+          riseSpeed={0.04}
+          riseScale={9.5}
+          flowSpeed={0.25}
+          flowDensity={2.9}
+          flowIntensity={0.4}
+          horizonIntensity={1}
+          haloIntensity={1.5}
+          circleScale={0.1}
+          scale={3.9}
+          brightness={2}
+        />
       </div>
 
       <div className="footer-inner" style={{ position: 'relative', zIndex: 1 }}>
