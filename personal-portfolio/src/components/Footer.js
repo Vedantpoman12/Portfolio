@@ -1,51 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import RisingLines from './RisingLines';
-
 export const Footer = () => {
-  const footerRef = useRef(null);
-  const [bgOpacity, setBgOpacity] = useState(1);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const footer = footerRef.current;
-      if (!footer) return;
-      const rect = footer.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      // Fade in smoothly as footer enters viewport, stay clearly visible
-      const progress = Math.max(0, Math.min(1, (windowH - rect.top) / (rect.height * 0.5)));
-      setBgOpacity(Math.max(0.7, progress));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <footer className="site-footer" ref={footerRef} style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Rising Lines background — radiant fan of rising laser lines matching React Bits Pro */}
-      <div
-        className="footer-starburst-bg"
-        style={{ opacity: bgOpacity, transition: 'opacity 0.2s ease-out' }}
-      >
-        <RisingLines
-          color="#f3f7ff"
-          horizonColor="#e6e6ed"
-          haloColor="#b5dfff"
-          riseSpeed={0.04}
-          riseScale={9.5}
-          flowSpeed={0.25}
-          flowDensity={2.9}
-          flowIntensity={0.4}
-          horizonIntensity={1}
-          haloIntensity={1.5}
-          circleScale={0.1}
-          scale={3.9}
-          brightness={2}
-        />
-      </div>
-
-      <div className="footer-inner" style={{ position: 'relative', zIndex: 1 }}>
+    <footer className="site-footer">
+      <div className="footer-inner">
         {/* Left — Name branding */}
         <div className="footer-left">
           <div className="footer-name">
@@ -92,7 +48,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="footer-bottom" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="footer-bottom">
         <span className="footer-copy">© 2026 VEDANT POMAN</span>
         <span className="footer-bottom-loc">MUMBAI // INDIA</span>
       </div>
