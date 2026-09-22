@@ -273,22 +273,7 @@ export const ContactPage = () => {
             </div>
           </FadeUp>
 
-          {/* Direct Resume Link Button */}
           <FadeUp delay={300}>
-            <div className="contact-resume-block">
-              <div className="contact-field-label">CURRICULUM VITAE</div>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-resume-pdf-btn"
-              >
-                VIEW RESUME PDF [ ↗ ]
-              </a>
-            </div>
-          </FadeUp>
-
-          <FadeUp delay={320}>
             <div className="contact-footer-line">
               <span>MUMBAI // 19.07° N</span>
             </div>
