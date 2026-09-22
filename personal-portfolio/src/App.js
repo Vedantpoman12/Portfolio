@@ -7,7 +7,6 @@ import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ContactPage } from './pages/ContactPage';
-import TargetCursor from './components/TargetCursor';
 
 // Scroll to top on every page change
 function ScrollToTop() {
@@ -20,13 +19,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <TargetCursor
-        spinDuration={2}
-        hideDefaultCursor={true}
-        parallaxOn={true}
-        cursorColor="#ffffff"
-        cursorColorOnTarget="#aa88ff"
-      />
       <NavBar />
       <main>
         <Routes>
