@@ -1303,9 +1303,8 @@ button {
 
 .contact-tagline strong {
   font-family: 'CentraNo2', 'Space Grotesk', sans-serif;
-  background: #000;
-  color: #fff;
-  padding: 1px 4px;
+  color: inherit;
+  padding: 0;
   font-weight: 700;
 }
 
