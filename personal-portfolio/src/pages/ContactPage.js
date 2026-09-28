@@ -102,7 +102,7 @@ export const ContactPage = () => {
           <FadeUp>
             <div className="contact-photo-box">
               <div className="contact-photo-placeholder">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="1.2">
+                <svg width="44" height="4" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="1.2">
                   <circle cx="12" cy="8" r="4" />
                   <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>

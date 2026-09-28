@@ -5,7 +5,6 @@ import industrialFurnaceImg from "../assets/img/industrial-furnace.jpg";
 import agroAiImg from "../assets/img/agro-ai.png";
 import skillGapImg from "../assets/img/skill-gap.png";
 import zedValidatorImg from "../assets/img/zed-validator.png";
-import rescueRadarImg from "../assets/img/rescue-radar.svg";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
@@ -44,10 +43,10 @@ export const Projects = () => {
       url: "https://github.com/Vedantpoman12/Skill-Gap-Bridge",
     },
     {
-      title: "RescueRadar",
-      description: "AI-Powered Animal Welfare & Triage Platform",
-      imgUrl: rescueRadarImg,
-      url: "https://github.com/Vedantpoman12",
+      title: "ProBind",
+      description: "Protein Binding Analysis & AI Chatbot",
+      imgUrl: agroAiImg,
+      url: "https://github.com/Vedantpoman12/ProBind",
     },
   ];
 
@@ -59,15 +58,15 @@ export const Projects = () => {
           <Col size={12}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
-                <h2>Projects</h2>
-                <p>Explore projects developed by Vedant Poman, ranging from full-stack web applications and cloud deployments on Azure to intelligent AI systems and database architectures.</p>
-                <Row>
-                  {projects.map((project, index) => (
-                    <ProjectCard key={index} {...project} />
-                  ))}
-                </Row>
-              </div>}
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <h2>Projects</h2>
+                  <p>Explore projects developed by Vedant Poman, ranging from full-stack web applications and cloud deployments on Azure to intelligent AI systems and database architectures.</p>
+                  <Row>
+                    {projects.map((project, index) => (
+                      <ProjectCard key={index} {...project} />
+                    ))}
+                  </Row>
+                </div>}
             </TrackVisibility>
           </Col>
         </Row>

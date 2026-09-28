@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import GitHubCalendar from '../components/GitHubCalendar';
 
 // Simple fade-in-up hook
 function useFadeUp(ref) {
@@ -185,6 +186,9 @@ export const HomePage = () => {
           ))}
         </div>
       </section>
+
+      {/* ── GITHUB CALENDAR ─────────────────────── */}
+      <GitHubCalendar username="Vedantpoman12" />
 
       {/* ── TECH STACK ────────────────────────── */}
       <section className="tech-stack-section">
