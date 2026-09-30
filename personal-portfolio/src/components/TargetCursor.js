@@ -85,9 +85,8 @@ const TargetCursor = ({
   useEffect(() => {
     if (isMobile || !cursorRef.current) return;
 
-    const originalCursor = document.body.style.cursor;
     if (hideDefaultCursor) {
-      document.body.style.cursor = 'none';
+      document.body.classList.add('target-cursor-active');
     }
 
     const cursor = cursorRef.current;
@@ -371,7 +370,7 @@ const TargetCursor = ({
       }
 
       spinTl.current?.kill();
-      document.body.style.cursor = originalCursor;
+      document.body.classList.remove('target-cursor-active');
 
       isActiveRef.current = false;
       targetCornerPositionsRef.current = null;
