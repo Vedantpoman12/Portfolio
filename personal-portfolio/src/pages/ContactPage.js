@@ -117,7 +117,6 @@ export const ContactPage = () => {
             <div className="contact-form-card">
               <div className="contact-form-header">
                 <span className="contact-form-tag">{'//'} DIRECT TRANSMISSION</span>
-                <span className="contact-form-status">EMAILJS_READY</span>
               </div>
               <form onSubmit={handleSubmit} className="brutal-contact-form">
                 <div className="form-group-brutal">
